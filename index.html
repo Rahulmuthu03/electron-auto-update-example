@@ -32,12 +32,12 @@
 <body>
   <h1>Electron Auto Update Example</h1>
   <p id="version"></p>
-  <div id="notification" class="hidden">
-    <p id="message"></p>
+  <div id="notification">
+    <p id="message">update available Clicl to Download!</p>
     <button id="close-button" onClick="closeNotification()">
       Close
     </button>
-    <button id="restart-button" onClick="restartApp()" class="hidden">
+    <button id="restart-button" onClick="restartApp()">
       Restart
     </button>
   </div>
@@ -58,15 +58,8 @@
       ipcRenderer.removeAllListeners('update_available');
       message.innerText = 'A new update is available. Downloading now...';
       notification.classList.remove('hidden');
-    });
-    ipcRenderer.on("checking-for-update", () => {
-      console.log('checking-for-update');
-    });
-    /*No updates available*/
-    ipcRenderer.on("update-not-available", () => {
-      console.log('update-not-available');
-    });
-
+    }); 
+    
     ipcRenderer.on('update_downloaded', () => {
       ipcRenderer.removeAllListeners('update_downloaded');
       message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
